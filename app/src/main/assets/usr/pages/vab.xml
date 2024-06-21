@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<group>
+    <text>
+        <slices>
+            <slice size="18" color="#FFFF0000">刷机有风险！请备份手机数据！</slice>
+        </slices>
+    </text>
+</group>
+
+<group>
+  <action>
+        <title>我已备份！下一步</title>
+        <desc></desc>
+        <set>unzip "${zip:="$zip2"}"  -d /sdcard/RootES
+        update_engine_client --update --payload=/sdcard/RootES/*.bin --metadata=/sdcard/RootES/*.txt</set>
+        <params>
+            <param name="zip" type="file" suffix="zip" editable="true" required="true" title="选择刷机包" desc="" />
+        </params>
+    </action>
+</group>

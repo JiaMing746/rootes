@@ -1,0 +1,179 @@
+    if $LOCKEDED; then
+        visible=1
+    else
+        visible=0
+    fi
+
+
+cat <<Han
+<?xml version="1.0" encoding="utf-8"?>
+<resource dir="file:///android_asset/Configuration_File" />
+<group>
+        <text>
+            <title>2024年新年快乐，万事如意</title>
+            <desc>过年少玩机，回家多陪伴家人</desc>
+        </text>
+    </group>
+ <group>
+Han
+
+
+if $LOCKED; then
+cat <<Han
+    <text visible="echo $visible">
+        <slices>
+            <slice size="18" color="#FFFF0000">未能获取到ROOT权限，能用啥功能自己去玩吧</slice>
+        </slices>
+    </text>
+Han
+fi
+
+
+if [ ! -f /data/adb/modules/startboot/module.prop ]; then
+cat <<Han
+    <text visible="echo $visible">
+        <slices>
+            <slice size="18" color="#FFFF0000">推荐安装扩展模块！</slice>
+        </slices>
+    </text>
+    
+    
+    <action>
+        <title>安装扩展</title>
+            <set>
+            cd /data/adb/modules/
+            mkdir startboot
+            echo 'id=rootes
+name=玩机工具箱--扩展模块
+version=v1.0.0
+versionCode=100
+author=玩机工具箱
+description=开机自动启动sh' > /data/adb/modules/startboot/module.prop
+echo 请您重启软件！
+sleep 3
+pkill "$Package_name"
+</set>
+    </action>
+Han
+fi
+
+
+cat <<Han
+<group>
+        <page html="https://twmcy.github.io/update/index.html" title="公告" >
+        <summary sh=". ./CheckUpdate.sh" />
+    </page>
+</group>
+
+Han
+
+cat <<Han
+
+<group title="搜索">
+    <action reload="true" auto-off="true" interruptible="false">
+        <title>搜索本页功能</title>
+        <params>
+            <param name="Content" title="输入你要搜索的功能标题，不区分大小写" required="true" />
+        </params>
+        <set>. ./Search_Content.sh \$Pages</set>
+    </action>
+    <page title="搜索结果" config-sh="cat \$Pages/Search_Results.xml" visible="[[ \`wc -l 2>/dev/null &#60; \$Pages/Search_Results.xml\` -gt 13 ]] &#38;&#38; echo 1 || echo 0"/>
+        <action>
+        <title>清除搞机搜索结果</title>
+        <set>rm -f $Pages/Search_Results.xml $Pages/ADB/Search_Results.xml
+        am start -S $Package_name/com.root.system.SplashActivity; echo 将在下次打开玩机工具箱时生效</set>
+    </action>
+    
+</group>
+<group title="功能区">
+    <pages>
+        <page title="应用场景" config="$Pages/fps.sh" />
+        <page title="隐藏环境" config-sh="cat \$Pages/momo.xml" />
+        <page title="定时任务" config-sh="cat \$Pages/shells.xml" />
+        <page title="CPU处理" config-sh="cat \$Pages/cpu.sh" />
+        <page title="Magisk专区" config-sh="cat \$Pages/Magisk.xml" />
+        <page title="Magisk模块仓库" before-load=". \$ShellScript/Magisk_Module/Print_Magisk_Warehouse.sh" config-sh="cat \$Pages/Magisk_Warehouse.xml" visible="[[ -n \`which magisk\` ]] &#38;&#38; echo 1"/>
+        <page title="制作模块" config-sh="cat \$Pages/module.xml" />
+        <page title="Mindows专区（只有已安装Mindows才能打开）" config-sh="cat \$Pages/win.sh" >
+        <lock>
+                if [[ -f "/dev/block/bootdevice/by-name/mindowswin"]]; then
+                    echo 'unlocked'
+                else
+                    echo '只对已安装的Mindows使用'
+                fi
+        </lock>
+        </page>
+         <page title="镜像修补" config-sh="cat \$Pages/boot.xml" />
+        <page activity="am start-activity com.root.system/com.root.system.ActivityModules">
+            <title>模块仓库</title>
+            <desc></desc>
+        </page>
+    
+        <page title="应用/Xposed仓库" before-load=". \$ShellScript/Print_App_Store.sh" config-sh="cat \$Pages/App_Store.xml" />
+        <page title="开机页面专区" config-sh="cat \$Pages/Boot_Animation.xml" locked="$LOCKED">
+            <lock>
+                if [[ -f "/data/adb/modules/startboot/module.prop" &#38;&#38; $Have_ROOT ]]; then
+                    echo 'unlocked'
+                else
+                    echo '未安装 模块'
+                fi
+            </lock>
+        </page>
+        <page title="Miui主题" config-sh="cat \$Pages/mtz.xml" />
+        <page title="MIUI专区" config-sh="cat \$Pages/MIUI.xml" >
+            <lock>
+                if [[ `sh ./support/Check_Ui_miui.sh` = 0 ]]; then
+                    echo '该功能仅对MIUI用户开放'
+                else
+                    echo 'unlocked'
+                fi
+            </lock>
+        </page>
+    <page title="OTG功能区" config-sh="sh \$Pages/OTG.xml" />
+        <page title="ROOT专区" config-sh="cat \$Pages/ROOT.xml" locked="$LOCKED"/>
+        <page title="镜像分区专区" config-sh="cat \$Pages/IMG_Function.xml" locked="$LOCKED" />
+        <page title="高级重启" config-sh="cat \$Pages/Advanced_Restart.xml" locked="$LOCKED" />
+        <page title="应用程序管理专区" config-sh="cat \$Pages/APK.xml" />
+        <page title="系统相关查看与调试" config-sh="cat \$Pages/WanJi.xml" />
+        <page title="附加功能区" config-sh=". \$Pages/FuJia.xml" />
+        <page title="极客专区" config-sh="cat \$Pages/Geek.xml" locked="$LOCKED" visible="[[ -n \`which magisk\` ]] &#38;&#38; echo 0 || echo 1" />
+                <page title="LSPosed模块管理" config-sh="cat \$Pages/LSPosed.xml" visible="[[ -d /data/adb/lspd ]] &#38;&#38; echo 1 || echo 0" />
+        <page title="SWAP/zram" config-sh="cat \$Pages/SWAP/main.xml" locked="$LOCKED"/>
+        <page title="Termux专区" config-sh="cat \$Pages/Termux.xml" locked="$LOCKED">
+            <lock>
+                if [[ -d "$DATA_DIR/com.termux" &#38;&#38; $Have_ROOT ]]; then
+                    echo 'unlocked'
+                else
+                    echo '未安装 Termux 应用'
+                fi
+            </lock>
+        </page>
+        <page title="充电控制专区" config-sh="cat \$Pages/Charging_control.xml" visible=". ./support/Charging_control_support.sh" locked="$LOCKED" />
+        <page title="救援专区" config-sh="cat \$Pages/JiuYuan.xml" />
+    </pages>
+</group>
+<group title="其它">
+    <action>
+        <title>脚本执行器</title>
+        <params>
+            <param name="CMD" title="输入命令点击确认即可，多行命令用键盘上的回车换行" desc="可通过which 命令、去查找命令是否存在" required="true" value-sh="cat $ShellScript/Shell2.sh" />
+        </params>
+        <set>. ./Shell.sh</set>
+    </action>
+    <action>
+        <title>脚本执行器-执行.sh脚本</title>
+        <params>
+            <param name="File" type="file" suffix="sh" editable="true" title="可输入.sh文件绝对路径，也可以使用文件选择器选择文件" desc="温馨提示：可用「MT管理器」长按目录或文件 --&gt;点属性 --&gt;点击目录即可复制目录绝对路径，长按目录或长按名称即可复制文件绝对路径" required="true"/>
+        </params>
+        <set>cd /; . &#34;\$File&#34;</set>
+    </action>
+    <page title="玩机工具箱选项区" config-sh="cat \$Pages/GJZS.xml" />
+    <text>
+        <slices>
+            <slice run="am force-stop $Package_name" size="15" color="#FF0366D6" u="1">完全退出</slice>
+            <slice>　　　　　</slice>
+            <slice run="am start -S $Package_name/com.root.system.SplashActivity" size="15" color="#FF0366D6" u="1">重启玩机工具箱</slice>
+        </slices>
+    </text>
+</group>
+Han

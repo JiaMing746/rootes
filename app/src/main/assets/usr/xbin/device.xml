@@ -1,0 +1,79 @@
+#!/bin/bash
+
+START_DIR="/path/to/your/start/directory"
+
+# 获取设备列表
+adb_devices=$(adb devices)
+
+# 获取电池信息
+battery_info=$(adb shell dumpsys battery)
+
+# 获取运行内存信息
+mem_info=$(adb shell dumpsys meminfo)
+
+# 获取后台进程信息
+activity_info=$(adb shell dumpsys activity services)
+
+# 获取IMEI
+imei=$(adb shell settings get secure android_id)
+
+# 获取WiFi名称
+wifi_name=$(adb shell getprop wifi.ssid)
+
+# 获取序列号
+serial_number=$(adb shell getprop ro.serialno)
+
+# 获取型号
+model=$(adb shell getprop ro.product.model)
+
+# 获取存储空间使用信息
+storage_info=$(adb shell df)
+
+# 获取RAM使用率
+ram_usage=$(adb shell free -m)
+
+# 获取网络信息
+network_info=$(adb shell dumpsys connectivity)
+
+# 获取传感器信息
+sensor_info=$(adb shell dumpsys sensorservice)
+
+# 获取屏幕亮度
+brightness=$(adb shell settings get system screen_brightness)
+
+# 获取应用列表
+app_list=$(adb shell pm list packages)
+
+# 获取运行中的进程
+running_processes=$(adb shell ps)
+
+# 获取设备屏幕分辨率
+screen_resolution=$(adb shell wm size)
+
+if [ -e "$START_DIR/oobe" ]; then
+    cat <<EOL
+<?xml version="1.0" encoding="utf-8"?>
+<group>
+    <text>
+        <title>设备信息</title>
+        <desc>
+            设备列表: $adb_devices
+            电池信息: $battery_info
+            运行内存信息: $mem_info
+            后台进程信息: $activity_info
+            IMEI: $imei
+            WiFi名称: $wifi_name
+            序列号: $serial_number
+            型号: $model
+            存储空间使用信息: $storage_info
+            RAM使用率: $ram_usage
+            网络信息: $network_info
+            传感器信息: $sensor_info
+            屏幕亮度: $brightness
+            应用列表: $app_list
+            运行中的进程: $running_processes
+            屏幕分辨率: $screen_resolution
+        </desc>
+    </text>
+</group>
+EOL

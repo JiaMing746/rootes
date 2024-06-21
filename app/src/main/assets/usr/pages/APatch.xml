@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<group>
+    <action>
+        <title>安装APatch</title>
+        <desc>文件在/sdcard/RootES/kernelsu</desc>
+        <set>echo 正在下载
+        wget -P /data/user/$ANDROID_UID/$Package_name/files/usr/xbin/ https://hub.fgit.cf/Twmcy/Twmcy.github.io/releases/download/update/APatch_10442-4-g86e7698.apk
+        APatch.sh
+        cp /data/user/$ANDROID_UID/$Package_name/files/usr/xbin/boot-apatch.img /sdcard/RootES</set>
+              <params>
+            <param name="CMD" title="超级密匙" desc="超级密匙" required="true"/>
+        </params>
+        <params>
+            <param name="img" type="file" suffix="img" editable="true" required="true" title="" desc="此处选择你的原厂boot" />
+        </params>
+    </action>
+    
+</group>
+
+
+<group>
+    <action>
+        <title>保留APatch</title>
+        <desc>文件在/sdcard/RootES/kernelsu</desc>
+        <set>echo 正在下载
+        wget -P /data/user/$ANDROID_UID/$Package_name/files/usr/xbin/ https://hub.fgit.cf/Twmcy/Twmcy.github.io/releases/download/update/APatch_10442-4-g86e7698.apk
+        APatch-Root.sh
+        cp /data/user/$ANDROID_UID/$Package_name/files/usr/xbin/boot-apatch.img /sdcard/RootES</set>
+              <params>
+            <param name="CMD" title="超级密匙" desc="超级密匙" required="true"/>
+        </params>
+    </action>
+    
+</group>

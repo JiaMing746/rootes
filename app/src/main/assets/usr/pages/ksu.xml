@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<group>
+<!-- START -->
+    <action>
+        <title>编译kernelsu（GKI）</title>
+        <desc>文件在/sdcard/RootES/kernelsu，仅支持AnyKernel3解压，否则无法开机</desc>
+        <set>      
+        cd /sdcard/RootES/
+        magiskboot unpack "${img:="$img2"}"
+        mkdir kernelsu
+        rm -rf /sdcard/RootES/kernel
+        cp "${img1:="$img12"}" /data/user/$ANDROID_UID/$Package_name/files/
+        cd /data/user/$ANDROID_UID/$Package_name/files/
+        magiskboot unpack *.img
+        cp -f /data/user/$ANDROID_UID/$Package_name/files/kernel /sdcard/RootES/
+         cd /sdcard/RootES/
+        magiskboot repack "${img:="$img2"}" boot.img
+        cp -f /$HOME/*.img /sdcard/RootES/kernelsu
+        rm -rf /sdcard/RootES/kernel
+        rm -rf $HOME/ramdisk.cpio
+        rm -rf $HOME/dtb
+        rm -rf $HOME/*.img
+        echo 完成！</set>
+        <params>
+<param name="img1" type="file" suffix="img" editable="true" required="true" title="" desc="此处选择你的下载的kernelsu包" />
+        </params>
+        <params>
+<param name="img" type="file" suffix="img" editable="true" required="true" title="" desc="此处选择你的原厂boot" />
+        </params>
+    </action>
+    
+    <!-- END -->
+    <text>
+        <slices>
+<slice run="echo 只针对GKI设备，非GKI切勿尝试！！！" size="15" color="#FF0366D6" u="1">警告说明</slice>
+        </slices>
+    </text>
+    <!-- END -->
+<!-- START -->
+    <action>
+        <title>编译kernelsu（非GKI）</title>
+        <desc>文件在/sdcard/RootES/kernelsu</desc>
+        <set>
+        mkdir /sdcard/RootES/kernelsu
+        magiskboot unpack "${img:="$img2"}" 
+        cp -f "${kernel1:="$kernel2"}" $HOME
+        cp -f "${kernel1:="$kernel2"}" $HOME
+        cp -f "${kernel12:="$kernel2"}" $HOME
+        cd $HOME
+        rm -rf $HOME/kernel
+        mv *.kernel kernel
+        magiskboot repack "${img:="$img2"}" boot.img
+        cp -f $HOME/boot.img /sdcard/RootES/kernelsu
+        sleep 1
+        rm -rf /sdcard/RootES/kernel
+        rm -rf $HOME/ramdisk.cpio
+        rm -rf $HOME/dtb
+        rm -rf $HOME/*.img
+        rm -rf $HOME/kernel
+        echo 完成！
+        </set>
+        <params>
+<param name="kernel1" type="file" suffix="kernel" editable="true" required="true" title="" desc="此处选择你的下载的kernelsu包，是kernel" />
+        </params>
+        <params>
+<param name="kernel12" type="file" suffix="dtb" editable="true" required="true" title="" desc="此处选择你的下载的kernelsu包，是dtb" />
+        </params>
+        <params>
+<param name="img" type="file" suffix="img" editable="true" required="true" title="" desc="此处选择你的原厂boot" />
+        </params>
+    </action>
+    <!-- END -->
+    <text>
+        <slices>
+<slice run="echo 只针对非GKI设备，已编译过kernel的使用，kernel是你kernel的编译包，没有编译包切勿尝试！！！" size="15" color="#FF0366D6" u="1">警告说明</slice>
+        </slices>
+    </text>
+    
+<!-- START -->
+    <group>
+    <action>
+        <title>gz解包</title>
+        <desc>安装kernel的必要</desc>
+        <set>gzip -d "${gz:="$gz2"}"</set>
+        <params>
+<param name="gz" type="file" suffix="gz" editable="true" required="true" title="" desc="温馨提示：可用「MT管理器」长按目录或文件 -->点属性 -->点击目录即可复制目录绝对路径，长按目录或长按名称即可复制文件绝对路径" />
+        </params>
+    </action>
+    <!-- END -->
+</group>
+</group>

@@ -1,0 +1,11 @@
+executor_core="file:///android_asset/executor.sh"
+toolkit_dir="file:///android_asset/usr"
+before_start_sh="file:///android_asset/kr-script/Start.sh"
+allow_home_page="1"
+favorite_config_sh="file:///android_asset/oobe.sh"
+#Beta通道
+#page_list_config_sh="file:///android_asset/kr-script/Home.sh"
+#Beta公测暂时被禁
+page_list_config_sh=". $Pages/Home.xml"
+#favorite_config="file:///android_asset/pages/Home.xml"
+#page_list_config="file:///android_asset/pages/OTG.xml"

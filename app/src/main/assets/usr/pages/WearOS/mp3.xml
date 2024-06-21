@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <group>
+    <action>
+        <title>修改铃声</title>
+        <param name="ringtonePath" label="铃声文件路径" type="text" desc="输入铃声文件的绝对路径" />
+        <set><![CDATA[
+            if [ -n "$ringtonePath" ]; then
+                adb shell settings put system ringtone "$ringtonePath"
+                echo "已修改铃声为：$ringtonePath"
+            else
+                echo "未输入铃声文件路径"
+            fi
+        ]]></set>
+    </action>
+    </group>
+    
+    
+    <group>
+    <action>
+        <title>修改闹钟声</title>
+        <param name="alarmSoundPath" label="闹钟声文件路径" type="text" desc="输入闹钟声文件的绝对路径" />
+        <set><![CDATA[
+            if [ -n "$alarmSoundPath" ]; then
+                adb shell settings put system alarm_alert "$alarmSoundPath"
+                echo "已修改闹钟声为：$alarmSoundPath"
+            else
+                echo "未输入闹钟声文件路径"
+            fi
+        ]]></set>
+    </action>
+    </group>
+
+    <group>
+    <action>
+        <title>修改短信提示音</title>
+        <param name="messageSoundPath" label="短信提示音文件路径" type="text" desc="输入短信提示音文件的绝对路径" />
+        <set><![CDATA[
+            if [ -n "$messageSoundPath" ]; then
+                adb shell settings put system sms_received_sound "$messageSoundPath"
+                echo "已修改短信提示音为：$messageSoundPath"
+            else
+                echo "未输入短信提示音文件路径"
+            fi
+        ]]></set>
+    </action>
+    </group>
+</items>

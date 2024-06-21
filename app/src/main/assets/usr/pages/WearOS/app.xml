@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <group title="文件选择">
+    <action>
+        <title>安装应用</title>
+        <param name="apkFilePath" label="应用文件" type="file" />
+        <set><![CDATA[
+            if [ -n "$apkFilePath" ]; then
+                adb install -r "$apkFilePath"
+                echo "已安装应用：$apkFilePath"
+            else
+                echo "未选择应用文件"
+            fi
+        ]]></set>
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>卸载应用</title>
+        <param name="packageName" label="应用包名" type="text" desc="输入要卸载应用的包名" />
+        <set><![CDATA[
+            if [ -n "$packageName" ]; then
+                adb uninstall "$packageName"
+                echo "已卸载应用：$packageName"
+            else
+                echo "未输入应用包名"
+            fi
+        ]]></set>
+    </action>
+</group>
+
+
+<group>
+    <action>
+        <title>冻结应用</title>
+        <param name="packageNameToFreeze" label="应用包名" type="text" desc="输入要冻结的应用的包名" />
+        <set><![CDATA[
+            if [ -n "$packageNameToFreeze" ]; then
+                adb shell pm disable-user --user 0 "$packageNameToFreeze"
+                echo "已冻结应用：$packageNameToFreeze"
+            else
+                echo "未输入应用包名"
+            fi
+        ]]></set>
+    </action>
+    </group>
+    
+    
+<group>
+    <action>
+        <title>解冻应用</title>
+        <param name="packageNameToUnfreeze" label="应用包名" type="text" desc="输入要解冻的应用的包名" />
+        <set><![CDATA[
+            if [ -n "$packageNameToUnfreeze" ]; then
+                adb shell pm enable "$packageNameToUnfreeze"
+                echo "已解冻应用：$packageNameToUnfreeze"
+            else
+                echo "未输入应用包名"
+            fi
+        ]]></set>
+    </action>
+    </group>
+

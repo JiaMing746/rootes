@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <group>
+<action>
+    <title>调整分辨率和DPI</title>
+    <param name="width" desc="屏幕宽度" label="宽度" max="1920" min="720" required="required" type="int" />
+    <param name="height" desc="屏幕高度" label="高度" max="1920" min="720" required="required" type="int" />
+    <param name="dpi" desc="像素密度" label="DPI" max="480" min="120" required="required" type="int" />
+    <set><![CDATA[
+        adb shell wm size $width"x"$height && adb shell wm density $dpi
+        echo "已将分辨率设置为：$width x $height，DPI设置为：$dpi"
+    ]]></set>
+</action>
+    </group>
+
+    <group>
+    <action>
+        <title>模拟屏幕点击</title>
+        <param name="xCoordinate" label="X坐标" type="int" desc="输入点击的X坐标" />
+        <param name="yCoordinate" label="Y坐标" type="int" desc="输入点击的Y坐标" />
+        <set><![CDATA[
+            if [ -n "$xCoordinate" ] && [ -n "$yCoordinate" ]; then
+                adb shell input tap $xCoordinate $yCoordinate
+                echo "已模拟屏幕点击：X坐标 $xCoordinate，Y坐标 $yCoordinate"
+            else
+                echo "未输入点击坐标"
+            fi
+        ]]></set>
+    </action>
+    </group>
+    
+<group>
+        <action>
+            <title>设置屏幕方向</title>
+            <param name="orientation" desc="屏幕方向" label="方向" type="enum" required="required">
+                <option value="portrait">竖屏</option>
+                <option value="landscape">横屏</option>
+            </param>
+            <set><![CDATA[
+                if [ "$orientation" = "portrait" ]; then
+                    adb shell settings put system user_rotation 0
+                elif [ "$orientation" = "landscape" ]; then
+                    adb shell settings put system user_rotation 1
+                fi
+                echo "已将屏幕方向设置为：$orientation"
+            ]]></set>
+        </action>
+    </group>
+
+    <group>
+        <switch>
+            <title>屏幕自动旋转</title>
+            <desc>开启或关闭屏幕自动旋转功能</desc>
+            <get>settings get system accelerometer_rotation</get>
+            <set><![CDATA[
+                if [ "$state" = "1" ]; then
+                    adb shell settings put system accelerometer_rotation 1
+                    echo "已开启屏幕自动旋转"
+                else
+                    adb shell settings put system accelerometer_rotation 0
+                    echo "已关闭屏幕自动旋转"
+                fi
+            ]]></set>
+        </switch>
+    </group>
+
+
+<group>
+    <action title="恢复所有">
+        <script><![CDATA[
+            # 恢复屏幕操作
+            # 这里可以加入你需要执行的屏幕恢复操作
+
+            # 以下为示例，可以根据实际需求修改
+            adb shell wm size reset
+            adb shell wm density reset
+
+            echo "屏幕恢复完成"
+
+        ]]></script>
+    </action>
+</group>

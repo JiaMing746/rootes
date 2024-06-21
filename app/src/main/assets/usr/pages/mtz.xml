@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<text>目前只支持导入主题</text>
+<group>
+<!-- START -->
+    <action>
+        <title>导入主题</title>
+        <desc>重启生效，要安装Magisk生效！</desc>
+        <set>
+        mkdir /data/adb/modules/startboot/ >/dev/null 2>/dev/null
+        mkdir /data/adb/modules/startboot/system >/dev/null 2>/dev/null
+        mkdir /data/adb/modules/startboot/system/product >/dev/null 2>/dev/null
+        mkdir /data/adb/modules/startboot/system/product/media >/dev/null 2>/dev/null
+        mkdir /data/adb/modules/startboot/system/product/media/theme >/dev/null 2>/dev/null
+        mkdir /data/adb/modules/startboot/system/product/media/theme/default/ >/dev/null 2>/dev/null
+        cp "${icon:="$icon2"}" /data/adb/modules/startboot/system/product/media/theme/default >/dev/null 2>/dev/null
+        cd /data/adb/modules/startboot/system/product/media/theme/default/ >/dev/null 2>/dev/null
+        mv *.icon icons >/dev/null 2>/dev/null
+        chmod 731 * >/dev/null 2>/dev/null
+        exit >/dev/null 2>/dev/null</set>
+        <params>
+            <param name="icon" type="file" suffix="icon" editable="true" required="true" title="可输入主题文件绝对路径，也可以使用文件选择器选择文件" desc="" />
+        </params>
+    </action>
+<!-- END -->
+<!-- START -->
+    <action>
+        <title>创造主题（推荐高级玩家）</title>
+        <desc></desc>
+        <set>mkdir /sdcard/rootes/
+        cp /data/user/$ANDROID_UID/$Package_name/files/usr/mtz.zip /sdcard/rootes
+        cd /sdcard/rootes
+        unzip mtz.zip
+        echo 已经准备好了，用mt管理器修改，然后打包成zip，重命名.icon
+</set>
+    </action>
+<!-- END -->
+</group>

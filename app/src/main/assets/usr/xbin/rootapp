@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# 获取目录的所有者用户名
+username=$(stat -c %U "$app")
+
+# 输出用户名
+echo "用户名为: $username"
+su "$username" -c su

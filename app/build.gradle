@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'stringfog'
+
+stringfog {
+    implementation 'com.github.megatronking.stringfog.xor.StringFogImpl'
+    enable true
+    fogPackages = ['com.root.system']
+    debug false
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '32.0.0'
+
+    defaultConfig {
+        minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 28
+        versionCode 2005
+        versionName "2.0.0"
+    }
+
+    if (System.getenv("KEYSTORE_PATH") != null) {
+        signingConfigs {
+            release {
+                storeFile file(System.getenv("KEYSTORE_PATH"))
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+                enableV2Signing true
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (System.getenv("KEYSTORE_PATH") != null) {
+                signingConfig signingConfigs.release
+            }
+            applicationVariants.all { variant ->
+                def suffix
+                if (variant.buildType.name == 'release') {
+                    suffix = 'release'
+                } else {
+                    suffix = 'debug'
+                }
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "release.apk"
+                        output.outputFileName = fileName
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(':common') // 添加依赖模块
+    implementation project(':krscript') // 添加依赖模块
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'com.microsoft.appcenter:appcenter-analytics:4.4.3'
+    implementation 'com.microsoft.appcenter:appcenter-crashes:4.4.3'
+    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.android.support:design:28.0.0' // 示例，确保版本正确
+    implementation 'com.github.megatronking.stringfog:xor:3.0.0'
+    implementation 'com.drakeet.about:about:2.5.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.drakeet.multitype:multitype:4.3.0'
+}
+repositories {
+    mavenCentral()
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_graph"
+        android:icon="@drawable/graph"
+        android:orderInCategory="100"
+        android:title=""
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/option_menu_reboot"
+        android:icon="@drawable/power"
+        android:orderInCategory="100"
+        android:title=""
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/option_menu_info"
+        android:icon="@drawable/info"
+        android:orderInCategory="100"
+        android:title="关于"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+        
+    <item
+        android:id="@+id/option_menu_update"
+        android:icon="@drawable/update"
+        android:orderInCategory="100"
+        android:title="检测更新正式版"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+        
+    <item
+        android:id="@+id/option_menu_update_beta"
+        android:icon="@drawable/update"
+        android:orderInCategory="100"
+        android:title="关注测试版"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+        
+    <item
+        android:id="@+id/option_menu_settings"
+        android:icon="@drawable/settings"
+        android:orderInCategory="100"
+        android:title="界面设置"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+</menu>

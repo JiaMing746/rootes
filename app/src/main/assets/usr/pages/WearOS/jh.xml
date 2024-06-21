@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <group title="已保护个人隐私">
+    <action>
+        <title>打电话</title>
+        <param name="phoneNumber" label="电话号码" type="text" desc="输入要拨打的电话号码" />
+        <set><![CDATA[
+            if [ -n "$phoneNumber" ]; then
+                adb shell am start -a android.intent.action.CALL -d "tel:$phoneNumber"
+                echo "正在拨打电话：$phoneNumber"
+            else
+                echo "未输入电话号码"
+            fi
+        ]]></set>
+    </action>
+    </group>
+
+    <group>
+    <action>
+        <title>发送短信</title>
+        <param name="recipient" label="收件人号码" type="text" desc="输入短信的收件人号码" />
+        <param name="messageText" label="短信内容" type="text" desc="输入要发送的短信内容" />
+        <set><![CDATA[
+            if [ -n "$recipient" ] && [ -n "$messageText" ]; then
+                adb shell am start -a android.intent.action.SENDTO -d "sms:$recipient" --es sms_body "$messageText"
+                echo "正在发送短信给：$recipient，内容：$messageText"
+            else
+                echo "未输入收件人号码或短信内容"
+            fi
+        ]]></set>
+    </action>
+    </group>
+
+    <group>
+    <action>
+        <title>保存联系人</title>
+        <param name="contactName" label="联系人姓名" type="text" desc="输入要保存的联系人姓名" />
+        <param name="contactNumber" label="联系人号码" type="text" desc="输入要保存的联系人号码" />
+        <set><![CDATA[
+            if [ -n "$contactName" ] && [ -n "$contactNumber" ]; then
+                adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name "$contactName" --es phone "$contactNumber"
+                echo "已保存联系人：$contactName，号码：$contactNumber"
+            else
+                echo "未输入联系人姓名或号码"
+            fi
+        ]]></set>
+    </action>
+    </group>
+</items>

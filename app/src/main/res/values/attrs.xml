@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 第一个资源文件的内容 -->
+    <attr name="aboutStyle" format="reference" />
+    <attr name="aboutBackground" format="reference|color" />
+    <attr name="aboutDescriptionTextAppearance" format="reference" />
+    <attr name="aboutSeparatorColor" format="color" />
+    <attr name="aboutElementTextAppearance" format="reference" />
+    <attr name="aboutElementIconTint" format="color" />
+    <attr name="aboutGroupTextAppearance" format="reference" />
+
+    <!-- 第二个资源文件的内容 -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="RamInfo">
+        <attr name="total" format="integer" />
+        <attr name="free" format="integer" />
+    </declare-styleable>
+</resources>

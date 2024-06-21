@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".CustomActivity">
+
+    <Button
+        android:id="@+id/selectLocationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择保存位置" />
+
+    <CheckBox
+        android:id="@+id/useMicCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectLocationButton"
+        android:layout_marginTop="16dp"
+        android:text="使用麦克风" />
+
+    <Button
+        android:id="@+id/startRecordingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/useMicCheckBox"
+        android:layout_marginTop="16dp"
+        android:text="开始录屏" />
+
+    <TextView
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startRecordingButton"
+        android:layout_marginTop="16dp"
+        android:text="点击结束录屏" />
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<group>
+<page config-sh="cat /data/user/$ANDROID_UID/$Package_name/files/usr/pages/ksu.xml" title="修补
+kernelsu" />
+ <page config-sh="cat /data/user/$ANDROID_UID/$Package_name/files/usr/pages/APatch.xml" title="APatch" />
+ 
+    <action interruptible="false">
+        <title>一键修补boot镜像文件注入Magisk</title>
+        <desc>修补boot.img来达到注入Magisk并ROOT</desc>
+        <set>. $ShellScript/MultiFunction.sh Magisk -patched</set>
+        <params>
+            <param name="KEEPVERITY" label="保持强制加密" type="checkbox" />
+            <param name="KEEPFORCEENCRYPT" label="保留 AVB 2.0/dm-verity" type="checkbox" />
+            <param name="RECOVERYMODE" label="安装到 Recovery" type="checkbox" />
+            <param name="File" type="file" suffix="img" editable="true" required="true" title="可输入boot.img文件绝对路径，也可以使用文件选择器选择文件" desc="温馨提示：可用「MT管理器」长按目录或文件 -->点属性 -->点击目录即可复制目录绝对路径，长按目录或长按名称即可复制文件绝对路径" />
+        </params>
+    </action>
+ </group>

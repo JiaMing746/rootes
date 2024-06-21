@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<group title="第一屏">
+<!-- START -->
+    <page config-sh=". ./Install_BootAnimation_Screen1_Page.sh">
+        <title>自定义制作第一屏/FASTBOOT界面……</title>
+        <summary>只适用于使用bmp格式的，可修改开机时第一屏、FASTBOOT界面、已解锁的界面、引导验证错误页面……&#x000A;当然不同设备图片个数顺序都不一样所以采用了动态方式获取不同设备的配置，并解析出所有图片</summary>
+    </page>
+<!-- END -->
+</group>
+
+<group>
+<!-- START -->
+    <action confirm="true" interruptible="false">
+        <title>查看开机动画文件路径</title>
+        <set>. ./View_BootAnimation_Screen2_PATH.sh -p</set>
+    </action>
+<!-- END -->
+</group>
+<group>
+  <action>
+        <title>导入开机动画</title>
+        <desc></desc>
+        <set>
+        cd /data/adb/modules/startboot
+        mkdir system
+        cd system
+        mkdir media
+       mkdir product
+       cd product
+        mkdir media
+        cp "${zip:="$zip2"}" /data/adb/modules/startboot/system/product/media/
+        cp "${zip:="$zip2"}" /data/adb/modules/startboot/system/media/</set>
+        <params>
+            <param name="zip" type="file" suffix="zip" editable="true" required="true" title="选择开机动画" desc="" />
+        </params>
+    </action>
+</group>
+<group title="开机音乐">
+<!-- START -->
+    <action interruptible="false">
+        <title>添加开机音乐</title>
+        <summary>使用Magisk模块方式添加一个开机音乐，需要机型支持</summary>
+        <set>. ./Magisk_Module/Add_Boot_Music.sh</set>
+        <params>
+            <param name="ChongQi" label="　是否刷入成功自动重启系统" type="switch" />
+            <param name="bootaudio" title="安装路径" options-sh=". ./Add_Boot_Music_PATH.sh" value-sh="grep_prop bootanimation $Data_Dir/Add_Boot_Music.log" required="true"/>
+            <param name="Customize_lu" title="当上面选择自定义路径时生效" placeholder="请输入您系统开机音乐文件所在的绝对路径" value-sh="grep_prop Customize_lu $Data_Dir/Add_Boot_Music.log" />
+            <param name="File" type="file" editable="true" required="true" title="可输入要添加的音乐文件绝对路径，也可以使用文件选择器选择文件" desc="温馨提示：可用「MT管理器」长按目录或文件 -->点属性 -->点击目录即可复制目录绝对路径，长按目录或长按名称即可复制文件绝对路径" />
+        </params>
+    </action>
+<!-- END -->
+<!-- START -->
+    <action interruptible="false">
+        <title>删除开机音乐文件</title>
+        <summary>当选择直接修改时点击即可删除！切记无法恢复！请深思熟虑哦！</summary>
+            <param name="ChongQi" label="　是否刷入成功自动重启系统" type="switch" />
+            <param name="install_Way" label="选择安装方式" options-sh="printf 'Module|通过Magisk模块挂载（推荐）\nsystem|直接修改system'" value-sh="grep_prop install_Way $Data_Dir/Add_Boot_Music.log"/>
+            <param name="bootaudio" title="安装路径" options-sh=". ./Add_Boot_Music_PATH.sh" value-sh="grep_prop bootanimation $Data_Dir/Add_Boot_Music.log" required="true"/>
+            <param name="Customize_lu" title="当上面选择自定义路径时生效" placeholder="请输入您系统开机音乐文件所在的绝对路径" value-sh="grep_prop Customize_lu $Data_Dir/Add_Boot_Music.log" />
+        <set>. ./Magisk_Module/Add_Boot_Music.sh -d</set>
+    </action>
+<!-- END -->
+<!-- START -->
+    <action confirm="true" interruptible="false">
+        <title>查看开机音乐路径</title>
+        <set>. ./View_Boot_Music_PATH.sh -p</set>
+    </action>
+<!-- END -->
+</group>
+
+<group title="其它">
+<!-- START -->
+    <action shell="hidden" auto-off="true" interruptible="false">
+        <title>播放开机动画</title>
+        <set>. ./Play_Boot_Animation.sh</set>
+            <param name="Set_Time" title="请输入要播放多久，时间单位秒" type="int" maxlength="3" required="true" value-sh="cat $Data_Dir/Play_Boot_Animation2.log" />
+    </action>
+<!-- END -->
+<!-- START -->
+    <action shell="hidden" auto-off="true" interruptible="false">
+        <title>播放开机音乐</title>
+        <set>. ./Play_Boot_Music.sh</set>
+            <param name="bootaudio" title="安装路径" options-sh=". ./Add_Boot_Music_PATH.sh" value-sh="grep_prop bootanimation $Data_Dir/Play_Boot_Music.log" required="true"/>
+            <param name="Customize_lu" title="当上面选择自定义路径时生效" placeholder="请输入您系统开机音乐文件所在的绝对路径" value-sh="grep_prop Customize_lu $Data_Dir/Play_Boot_Music.log" />
+    </action>
+<!-- END -->
+<!-- START -->
+    <switch auto-off="true" interruptible="false">
+        <title>锁定开机动画第二屏</title>
+        <desc>打开此开关锁定后无法更改第二屏</desc>
+        <get>. ./switchs/Lock_BootAnimation_Screen2_Get.sh</get>
+        <set>. ./switchs/Lock_BootAnimation_Screen2_Set.sh</set>
+    </switch>
+<!-- END -->
+</group>

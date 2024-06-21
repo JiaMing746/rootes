@@ -1,0 +1,12 @@
+#!/system/bin/sh
+BASEDIR=$(dirname "$0")
+DEX="$BASEDIR"/shizuku.dex
+
+if [ ! -f "$DEX" ]; then
+  echo "Cannot find $DEX, please check the tutorial in Shizuku app"
+  exit 1
+fi
+
+# Replace "PKG" with the application id of your terminal app
+export SHIZUKU_APPLICATION_ID="Han.GJZS"
+/system/bin/app_process -Djava.class.path="$DEX" /system/bin --nice-name=sui_wrapper rikka.shizuku.cmd.ShizukuCmd "$@"

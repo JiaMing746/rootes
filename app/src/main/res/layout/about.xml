@@ -1,0 +1,89 @@
+<!-- res/layout/about.xml -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="?android:attr/windowBackground"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="玩机工具箱"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <TextView
+        android:id="@+id/tvAppVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/tvAppName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="Version 1.0.0"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <TextView
+        android:id="@+id/tvAppDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_below="@id/tvAppVersion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="介绍:\n我也不知道有什么好写的，就这样了，这个工具箱不用Root就可以在手机上给你的WearOS刷机/玩机，说好听点，这个就是WearOS工具箱，说不好听的，就是个OTG工具箱，加上我学习繁忙，做什么酸碱滴定这些，因为我学的是生物专业，有什么bug反馈到我的github，基于pio修改，还有，祝各位新年快乐😆😆😆"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRestartAdb"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开启adb服务"
+        android:layout_below="@id/tvAppDescription"
+        android:layout_marginTop="16dp"
+        app:backgroundTint="?android:attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnKillAdb"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="关闭adb服务"
+        android:layout_below="@id/btnRestartAdb"
+        android:layout_marginTop="8dp"
+        app:backgroundTint="?android:attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOpenBaidu"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="反馈"
+        android:layout_below="@id/btnKillAdb"
+        android:layout_marginTop="8dp"
+        app:backgroundTint="?android:attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退出"
+        android:layout_below="@id/btnOpenBaidu"
+        android:layout_marginTop="16dp"
+        app:backgroundTint="?android:attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+</RelativeLayout>

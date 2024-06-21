@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+<group>
+    <action>
+        <title>上传文件到设备</title>
+        <param name="localFilePath" label="本地文件路径" type="text" desc="输入本地文件的绝对路径" />
+        <param name="deviceFilePath" label="设备文件路径" type="text" desc="输入设备上保存文件的路径" />
+        <set><![CDATA[
+            if [ -n "$localFilePath" ] && [ -n "$deviceFilePath" ]; then
+                adb push "$localFilePath" "$deviceFilePath"
+                echo "已上传文件：$localFilePath 到设备路径：$deviceFilePath"
+            else
+                echo "未输入本地文件路径或设备文件路径"
+            fi
+        ]]></set>
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>删除设备上的文件</title>
+        <param name="deviceFilePathToDelete" label="设备文件路径" type="text" desc="输入要删除的设备上文件的路径" />
+        <set><![CDATA[
+            if [ -n "$deviceFilePathToDelete" ]; then
+                adb shell rm "$deviceFilePathToDelete"
+                echo "已删除设备上文件：$deviceFilePathToDelete"
+            else
+                echo "未输入设备文件路径"
+            fi
+        ]]></set>
+    </action>
+</group>
+
+<group>
+<action>
+        <title>从设备下载文件</title>
+        <param name="deviceFilePathToDownload" label="设备文件路径" type="text" desc="输入要从设备下载的文件路径" />
+        <param name="localDownloadPath" label="本地保存路径" type="text" desc="输入本地保存下载文件的路径" />
+        <set><![CDATA[
+            if [ -n "$deviceFilePathToDownload" ] && [ -n "$localDownloadPath" ]; then
+                adb pull "$deviceFilePathToDownload" "$localDownloadPath"
+                echo "已从设备下载文件：$deviceFilePathToDownload 到本地路径：$localDownloadPath"
+            else
+                echo "未输入设备文件路径或本地保存路径"
+            fi
+        ]]></set>
+    </action>
+    </group>
+</items>

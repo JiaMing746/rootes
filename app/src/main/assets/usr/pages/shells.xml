@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <group>
+        
+    <action>
+        <title>导入sh脚本</title>
+        <params>
+            <param name="File" type="file" suffix="sh" editable="true" title="可输入.sh文件绝对路径，也可以使用文件选择器选择文件" desc="温馨提示：可用「MT管理器」长按目录或文件 --&gt;点属性 --&gt;点击目录即可复制目录绝对路径，长按目录或长按名称即可复制文件绝对路径" required="true"/>
+        </params>
+       <param name="s" label="多少秒执行" type="text" desc="输入秒" />
+        <set>
+        echo "sleep $s
+        sh $File
+        sh /sdcard/RootES/start.sh" >/sdcard/RootES/start.sh</set>
+    </action>
+    
+       <action>
+            <title>手动输入</title>
+            <param name="File" label="命令输入" title="终端" placeholder="请输入...." type="text" />
+            <set>
+        echo "sleep $s
+        sh $File
+        sh /sdcard/RootES/start.sh" >/sdcard/RootES/start.sh</set>
+       </action>
+        
+    
+    <action shell="bg-task">
+            <title>开始</title>
+            <desc></desc>
+            <set>sh /sdcard/RootES/start.sh</set>
+            
+        </action>
+        
+</group>

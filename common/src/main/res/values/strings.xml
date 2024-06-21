@@ -1,0 +1,10 @@
+<resources>
+    <string name="execute_success">Execute success!</string>
+    <string name="execute_fail">Execute failed...</string>
+    <string name="execute_wait">Executing...</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="app_chooser_search_hint">Search for app name or package name...</string>
+    <string name="item_chooser_search_hint">Search for options</string>
+    <string name="select_all">Select all</string>
+    <string name="help_title">Tips</string>
+</resources>

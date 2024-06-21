@@ -1,0 +1,10 @@
+echo "请输入内测码: "
+read "$phoneNumber"
+if [ "$code" = "832405462" ]; then
+    echo "内测码正确"
+    touch ~/Flag/Enable
+    am start -S $Package_name/.SplashActivity %26%26 echo '请尝试手动重启APP！'
+else
+    echo "内测码错误"
+fi
+#我知道你会破解，我就是故意留的，不然我早加密了，其实就是想让他们有bug反馈给我

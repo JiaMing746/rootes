@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<group>
+<!-- START -->
+    <action>
+        <title>准备必要文件</title>
+        <desc>必须</desc>
+        <set>
+        mkdir /sdcard/RootES/Module/
+        mkdir /sdcard/RootES/Module/META-INF
+        mkdir /sdcard/RootES/Module/META-INF/com
+        mkdir /sdcard/RootES/Module/META-INF/com/google
+        mkdir /sdcard/RootES/Module/META-INF/com/google/android
+        echo "#MAGISK" >/sdcard/RootES/Module/META-INF/com/google/android/updater-script
+        cp $PREFIX/xbin/update-binary /sdcard/RootES/Module/com/google/android
+echo "id=$id
+name=$name
+version=$version
+versionCode=$versionCode
+author=$author
+description=$description" > /sdcard/RootES/Module/module.prop</set>
+        <params>
+        <param name="id" label="id" type="text" desc="输入id" />
+        <param name="name" label="名称" type="text" desc="输入名称" />
+        <param name="version" label="版本名称" type="text" desc="输入版本名称" />
+        <param name="versionCode" label="版本代码" type="text" desc="输入版本代码" />
+        <param name="author" label="作者" type="text" desc="输入作者名称" />
+        <param name="description" label="详细介绍" type="text" desc="输入详细介绍" />
+        </params>
+    </action>
+    </group>
+    
+    
+<group>
+  <action>
+        <title>开机动画</title>
+        <desc></desc>
+        <set>
+        cd /sdcard/RootES/Module/
+        mkdir system
+        cd system
+        mkdir media
+       mkdir product
+       cd product
+        mkdir media
+        cp "${zip:="$zip2"}" /sdcard/RootES/Module/system/product/media/
+        cp "${zip:="$zip2"}" /sdcard/RootES/Module/system/media/</set>
+        <params>
+            <param name="zip" type="file" suffix="zip" editable="true" required="true" title="选择开机动画" desc="" />
+        </params>
+    </action>
+</group>
+
+<group>
+  <action>
+        <title>开机自启sh</title>
+        <desc></desc>
+        <set>
+        echo "$sh" > /sdcard/RootES/Module/service.sh
+        echo "$sh" > /sdcard/RootES/Module/post-fs-data.sh</set>
+        <params>
+             <param name="sh" label="Shell" type="text" desc="输入Shell" />
+        </params>
+    </action>
+</group>
+
+<group>
+  <action>
+        <title>系统应用</title>
+        <desc></desc>
+        <set>
+        mkdir /sdcard/RootES/Module/system/app
+        cp "${apk:="$apk2"}" /sdcard/RootES/Module/system/app</set>
+        <params>
+            <param name="apk" type="file" suffix="apk" editable="true" required="true" title="选择开机动画" desc="" />
+        </params>
+    </action>
+</group>
+
+<group>
+  <action>
+        <title>打包</title>
+        <desc></desc>
+        <set>
+        cd /sdcard/RootES/Module/
+        zip -q -r /sdcard/RootES/Module/Module.zip *</set>
+    </action>
+</group>

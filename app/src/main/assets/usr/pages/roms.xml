@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-->MSMBOX，偷了死妈<-->
+<!-->我不希望你拿我的，要是被我发现了，你会死定<-->
+    <group>
+        <action>
+            <title>下载刷机包</title>
+            <param name="test" label="输入网址" title="下载后保存到/sdcard/Download" placeholder="请输入...." type="text" />
+            <set>downloadUrl="$test"
+                activity="$PACKAGE_NAME/$PACKAGE_NAME.ActionPageOnline"
+                am start -a android.intent.action.MAIN -n "$activity" --es downloadUrl "$downloadUrl"</set>
+        </action>
+    </group>
+
+<group>
+    <action>
+        <title>导入刷机包</title>
+        <desc>文件在工程项目</desc>
+        <set>echo 正在复制...
+        mkdir test_rom
+        cp "{zip:="$zip2"} /data/data/$PACKAGE_NAME/files/test_rom</set>
+        <params>
+            <param name="zip" type="file" suffix="zip" editable="true" required="true" title="" desc="温馨提示：可用「MT管理器」长按目录或文件 -->点属性 -->点击目录即可复制目录绝对路径，长按目录或长按名称即可复制文件绝对路径" />
+        </params>
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>解包ROM</title>
+        <desc>解包ROM，文件在工程项目</desc>
+        <set>
+        mkdir test_rom
+        unzip -o $test -d /data/data/$PACKAGE_NAME/files/test_rom</set>
+            <param name="test" label="刷机包路径" title="解压刷机包，不然功能无法使用" placeholder="请输入...." type="text" />
+    </action>
+</group>
+
+
+<group>
+    <action>
+        <title>提取boot</title>
+        <desc>文件在/sdcard/RootES</desc>
+        <set>cp /data/data/$PACKAGE_NAME/files/test_rom/boot.img /sdcard/RootES</set>
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>提取更多IMG</title>
+        <desc>文件在/sdcard/RootES</desc>
+        <set>cp /data/data/$PACKAGE_NAME/files/test_rom $test /sdcard/RootES/</set>
+            <param name="test" label="镜像名称" title="镜像名称" placeholder="请输入...." type="text" />
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>导入镜像</title>
+        <desc></desc>
+        <set>cp $test /data/data/$PACKAGE_NAME/files/test_rom</set>
+            <param name="test" label="路径" title="路径" placeholder="请输入...." type="text" />
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>打包刷机包</title>
+        <desc>文件在/sdcard/RootES</desc>
+        <set>echo 正在进行...
+        cd /data/data/$PACKAGE_NAME/files/test_rom
+        zip -q -r out.zip * -x "samples/*" -x "kr-script/*"
+        zip -d out.zip samples
+zip -d out.zip kr-script
+cp out.zip /sdcard/RootES
+rm -rf out.zip 
+echo 完成
+</set>
+    </action>
+</group>
+
+<group>
+    <action>
+        <title>清理项目</title>
+        <desc>文件在/sdcard/RootES</desc>
+        <set>echo 正在进行...
+        cd /data/data/$PACKAGE_NAME/files/test_rom
+        rm -rf *
+echo 完成
+</set>
+    </action>
+</group>

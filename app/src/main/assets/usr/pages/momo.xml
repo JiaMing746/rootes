@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <group>
+        <text>
+            <title>
+找到Magisk
+找到被Magisk模块修改的文件
+找到su进程
+找到可执行程序"su"
+</title>
+            <desc>
+面具-设置-隐藏Magisk应用，也有可能是模块问题
+面具-配置排除列表-勾选momo(全选)
+确保Shamiko模块正常工作(笑脸而非红X图标)。
+(是否开了遵守排除列表？关闭后重启即可解决。)
+(Shamiko非笑脸，是红X图标？移除Shamiko模块重启，重装再重启。)</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>
+找到Zygisk
+Zygote被注入
+Zygote行为异常
+</title>
+            <desc>更新Shamiko模块0.6以上版本</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>TEE损失</title>
+            <desc>TEE一般假死，刷入隐藏</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>发现注入代码</title>
+            <desc>更新momo4.3.1</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>
+ART参数异常
+SElinux处于宽容模式
+Seccomp未开启
+</title>
+            <desc>
+移除火柴的防格机模块。
+官方GG修改器-修复-(切换到工作，而SeLinux，并重新启动应用程序)，
+(更换使用官方GG修改器，魔改GG自查看作者是否移除了"修复"按钮)。
+排查面具模块，关闭或移除后重启系统，
+排除常住后台自启动需授权root的应用。
+(可尝试安装：开启SELinux.zip 面具模块)
+</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>SElinux规则异常，允许了neverallow条目。</title>
+            <desc>线刷回官方系统即可解决</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>数据未加密，挂载参数被修改。</title>
+            <desc>可能是boot又可能是rom，刷回官方解决问题</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>找到Xposed框架</title>
+            <desc>使用lsposed</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>
+找到Riru
+Momo环境损坏/无响应
+</title>
+            <desc>更新面具25.2以上版本，使用Zygisk模块。
+23.0面具已是过时产物，放弃使用Riru模块。</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>init.rc被修改</title>
+            <desc>第三方recovery引起的问题，
+更换其他的三方rec或刷回官方rec。
+(或者安装：隐藏init.rc被发现.zip 面具模块)</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>分区挂载异常</title>
+            <desc>SYSTEM分区被解锁，可能与boot修补magisk时保留了(AVB2.0/dm-verity)有关。</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>包管理服务异常</title>
+            <desc>卸载或关闭与核心破解类似的软件</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>权限系统异常</title>
+            <desc>
+卸载或关闭与核心破解类似的软件
+卸载 幸运破解器
+卸载 Fake Location</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>处于调试环境/已开启调试模式</title>
+            <desc>关闭开发者选项</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>存在Magisk或TWRP特定文件</title>
+            <desc>
+删除以下文件夹：
+/sdcard/TWRP
+/sdcard/Fox</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>非SDK接口的限制失效</title>
+            <desc>卸载Fake Location</desc>
+        </text>
+    </group>
+    
+     <group>
+        <text>
+            <title>bootloader未锁定</title>
+            <desc>刷入隐藏bootloader</desc>
+        </text>
+    </group>
+    

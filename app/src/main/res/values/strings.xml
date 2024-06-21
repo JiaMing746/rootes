@@ -1,0 +1,100 @@
+<resources>
+    <!--重要内容，谨慎修改-->
+    <string name="kr_script_config">WearOS</string>
+
+    <!--是否强制获取ROOT-->
+    <bool name="force_root">false</bool>
+
+    <string name="app_name">玩机工具箱</string>
+    <string name="btn_exit">退出</string>
+    <string name="float_monitor_tips">双击悬浮窗即可关闭，或按住拖动调整位置</string>
+    <string name="permission_float">请授权显示悬浮窗权限！</string>
+    <string name="please_wait">请稍等</string>
+    <string name="title_activity_action_page">功能分页</string>
+
+    <string name="btn_magisk_su">Magisk SU</string>>
+    <string name="btn_magisk_suu">Magisk SUU</string>
+    
+    <string name="kr_write_external_storage">Your message here</string>
+    <string name="transparent_ui_disabled">Your Disabled Message</string>
+    <string name="transparent_ui_enabled">Your Enabled Message</string>
+
+    <string name="about_contact_us">联系/反馈我们</string>
+    <string name="about_instagram">加入交流群</string>
+    <string name="about_facebook">关注 酷安</string>
+    <string name="about_play_store">去 Play Store 上评分</string>
+    <string name="about_youtube">在 Youtube 上查看</string>
+    <string name="about_twitter">关注 哔哩哔哩</string>
+    <string name="about_github">关注 GitHub</string>
+    <string name="about_website">欢迎访问我们的网站</string>>
+    <string name="appcenter_switch">抓取错误日志</string>
+    <string name="menu_miui_thermal">MIUI温控</string>
+
+    <string name="about_page_description">玩 机 工 具 箱(正式版)</string>
+    <string name="author_name"></string>
+    <string name="about_title"></string>
+    <string name="appliction_desc"></string>
+    <string name="appliction_name">界面设置</string>
+    <string name="appliction_author">目前只有一点功能</string>
+    <string name="engine_version_name"></string>
+
+    <string name="download">下载</string>    
+    <string name="menu_modules">Magisk模块</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_favorites">状态</string>
+    <string name="tab_pages">功能</string>
+
+    <string name="monitor_laod">负载：%d%%</string>
+    <string name="monitor_core_count">%d 核心</string>
+    <string name="monitor_cache_cleared">已回收用于缓存的RAM</string>
+    <string name="monitor_ram_cleared">RAM碎片已整理</string>
+
+    <string name="copy_success">复制成功</string>
+    <string name="btn_retry">重试</string>
+    <string name="title_activity_about_page">关于</string>
+    <string name="btnRestartAdb">重启ADB</string>
+    <string name="btnKillAdb">杀死ADB</string>
+    <string name="btnOpenBaidu">官方网站</string>
+    <string name="copy_right" translatable="false">Copyrights © %1$d</string>
+    
+    <string name="termsOfServiceSubtitle">介绍：\n多功能扩展系统，原[搞机助手]己经停止，玩机工具箱将会一直更新，免费开放的软件\n\n权限：
+\nandroid.permission.READ_EXTERNAL_STORAGE: 读取外部存储的权限。
+\nandroid.permission.WRITE_EXTERNAL_STORAGE: 写入外部存储的权限。
+\nandroid.permission.INTERNET: 访问网络的权限。
+\nandroid.permission.VIBRATE: 控制振动的权限。
+\nandroid.permission.USB_PERMISSION: USB设备权限。
+\nandroid.permission.SYSTEM_ALERT_WINDOW: 显示系统级警报窗口的权限。
+\ncom.android.launcher.permission.INSTALL_SHORTCUT: 安装快捷方式的权限。
+\ncom.android.launcher.permission.UNINSTALL_SHORTCUT: 卸载快捷方式的权限。
+\nandroid.permission.RECEIVE_BOOT_COMPLETED: 完成开机自启/后台运行
+\n感谢scene5的开源
+\n2024年新年快乐！</string>
+    <string name="termsOfServiceTitle">初次见面</string>
+    <string name="PoliceLine2">本软件是不用Root，如果使Root会刚好，此软件免费使用，有bug反馈反馈github</string>
+    <string name="dialog_cancelText">本软件是不用Root，如果使Root会刚好，此软件免费使用，有bug反馈反馈github</string>
+    <string name="PoliceLine1">本软件是不用Root，如果使Root会刚好，此软件免费使用，有bug反馈反馈github</string>
+    <string name="dialog_acceptText">本软件是不用Root，如果使Root会刚好，此软件免费使用，有bug反馈反馈github</string>
+    <string name="pio_starting">TOOLBOX·Root</string>
+    <string name="pop_before_start">现在，先校验一些权限设置...</string>
+    <string name="pop_started">检查并获取必需权限……</string>
+    <string name="pio_permission_checking">检查并获取必需权限……</string>
+    <string name="error_root">未能获得ROOT授权，如果你的手机已经ROOT，清在授权管理器弹出对话框时选择允许！</string>
+    <string name="error_su_timeout">等待ROOT授权超时，请检查授权管理器是否在后台运行！</string>
+    <string name="transparent_ui">界面透明 </string>
+    <string name="title_activity_file_selector">请选择文件</string>
+    <string name="title_activity_folder_selector">请长按选择目录</string>
+
+    <string name="btn_apply">应用</string>
+    <string name="power_shutdown_cmd">sync;svc power shutdown || reboot -p;</string>
+    <string name="power_reboot_cmd">sync;svc power reboot || reboot;</string>
+    <string name="power_hot_reboot_cmd">sync;am restart || busybox killall system_server;</string>
+    <string name="power_fastboot_cmd">sync;reboot bootloader;</string>
+    <string name="power_recovery_cmd">sync;reboot recovery;</string>
+    <string name="power_emergency_cmd">sync;reboot edl;</string>
+    
+    <string name="miui_thermal_desc">点击右上角的菜单，选择并编辑温控文件，编辑完成后点击保存~\n\n注意：随着安卓系统不断更新，要修改系统分区变得越来越困难，可能修改无法成功保存，或重启后即被自动还原，建议使用magisk模块来完成温控修改！\n\n温控文件一般是在/system/etc或/vendor/etc目录下，名称以“thermal”开头，后缀为“.conf”</string>
+    <string name="kill_adb">sync;adb kill-server;</string>
+    <string name="start_adb">sync;adb start-server;</string>
+    <string name="data_wear">sync;rm -rf /data/data/$PACKAGE_NAME/*;</string>
+    
+</resources>

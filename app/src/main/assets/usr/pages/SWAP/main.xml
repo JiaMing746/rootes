@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <group>
+        <text>
+            <title>注意：重启生效</title>
+            <slices>
+                <slice>扩展手机运行内存吧</slice>
+            </slices>
+        </text>
+    </group>
+    
+<group>
+
+<action interruptible="false">
+        <title>SWAP调整</title>
+        <summary sh="free2" />
+        <desc>空间大小</desc>
+        <param name="test6" desc="以MB单位" label="内存大小" max="10000000" min="1024"
+                required="required" type="int" />
+        <set>echo 正在调整
+        setofff
+        dd if=/dev/zero of=/data/swapfile bs=1M count=$test6
+        chmod 777 /data/swapfile
+        mkswap /data/swapfile
+        setonn</set>
+    </action>
+    
+    <action>
+            <title>打开SWAP</title>
+            <desc></desc>
+            <set>
+            if [ -f /data/swapfile ]; then
+    setonn
+else
+    echo "调整不存在"
+fi
+</set>
+        </action>
+        
+    <action>
+            <title>永久打开SWAP（部分无效）</title>
+            <desc></desc>
+            <set>if [ -f /data/swapfile ]; then
+    setonn2
+else
+    echo "调整不存在"
+fi</set>
+        </action>
+    
+    <action>
+            <title>永久打开SWAP（要安装扩展）</title>
+            <desc></desc>
+            <set>if [ -f /data/swapfile ]; then
+    echo "swapon /data/swapfile" >/data/adb/modules/msmbox/post-fs-data.sh
+else
+    echo "调整不存在"
+fi</set>
+        </action>
+    
+    
+    <action>
+            <title>关闭Swap</title>
+            <desc></desc>
+            <set>setofff</set>
+        </action>
+        
+        
+    <action>
+            <title>删除并关闭swap</title>
+            <desc></desc>
+            <set>setofff
+            rm -rf /data/swapfile
+            rm -rf /data/adb/modules/msmbox/post-fs-data.sh</set>
+        </action>
+        
+        
+    <!-- ZRAM调整操作 -->
+    <action interruptible="false">
+        <title>ZRAM调整</title>
+        <summary sh="free2" />
+        <desc>空间大小</desc>
+        <param name="test6" desc="以MB单位" label="内存大小" max="10000000" min="1024" required="required" type="int" />
+        <set>
+            echo 正在调整
+            swapoff /dev/block/zram0  # Disable swapping on zram
+        echo $test6 > /sys/block/zram0/disksize
+dd if=/dev/zero of=/dev/block/zram0 bs=1M count=$test6
+mkswap /dev/block/zram0  # Recreate swap on zram
+swapon /dev/block/zram0  # Enable swapping on zram
+            echo 报错的话，就失败，已经被其他应用使用，需要关闭
+        </set>
+    </action>
+
+    <!-- 打开zram操作 -->
+    <action>
+        <title>打开zram</title>
+        <desc></desc>
+        <set>
+            if [ -f /data/swapfile ]; then
+                swapon /dev/block/zram0
+            else
+                swapon /dev/block/zram0
+            fi
+        </set>
+    </action>
+
+    <!-- 关闭zram操作 -->
+    <action>
+        <title>关闭zram</title>
+        <desc></desc>
+        <set>
+            lsof /dev/block/zram0
+            swapoff /dev/block/zram0
+        </set>
+    </action>
+        </group>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<group>
+    <group>
+        <action>
+            <title>模拟充电状态</title>
+            <param name="chargingMode" desc="充电状态" label="状态" type="enum" required="required">
+                <option value="wireless">无线充电</option>
+                <option value="ac">交流充电</option>
+                <option value="discharging">未在充电</option>
+                <option value="default">恢复默认</option>
+            </param>
+            <set><![CDATA[
+                case "$chargingMode" in
+                    "wireless")
+                        adb shell dumpsys battery set ac 0
+                        adb shell dumpsys battery set usb 0
+                        adb shell dumpsys battery set wireless 1
+                        echo "已将充电状态设置为：无线充电"
+                        ;;
+                    "ac")
+                        adb shell dumpsys battery set ac 1
+                        adb shell dumpsys battery set usb 0
+                        adb shell dumpsys battery set wireless 0
+                        echo "已将充电状态设置为：交流充电"
+                        ;;
+                    "discharging")
+                        adb shell dumpsys battery set ac 0
+                        adb shell dumpsys battery set usb 0
+                        adb shell dumpsys battery set wireless 0
+                        echo "已将充电状态设置为：未在充电"
+                        ;;
+                    "default")
+                        adb shell dumpsys battery reset
+                        echo "已恢复默认充电状态"
+                        ;;
+                esac
+            ]]></set>
+        </action>
+    </group>
+</group>
+
+<group>
+    <action>
+        <title>模拟电池电量</title>
+        <param name="batteryLevel" desc="电池电量" label="电量" type="int" required="required" min="0" max="100"/>
+        <set><![CDATA[
+            # 将用户输入的电量值应用到电池状态
+            adb shell dumpsys battery set level $batteryLevel
+
+            echo "已将电池电量设置为：$batteryLevel%"
+        ]]></set>
+    </action>
+</group>
+
+<group>
+    <group>
+        <action>
+            <title>模拟睡眠状态</title>
+            <param name="sleepMode" desc="睡眠状态" label="状态" type="enum" required="required">
+                <option value="deep">深度打盹</option>
+                <option value="light">轻度打盹</option>
+                <option value="off">关闭灯盹</option>
+            </param>
+            <set><![CDATA[
+                case "$sleepMode" in
+                    "deep")
+                        adb shell dumpsys deviceidle force-idle
+                        echo "已进入深度打盹状态"
+                        ;;
+                    "light")
+                        adb shell dumpsys deviceidle step light
+                        echo "已进入轻度打盹状态"
+                        ;;
+                    "off")
+                        adb shell dumpsys deviceidle disable
+                        echo "已关闭灯盹状态"
+                        ;;
+                esac
+            ]]></set>
+        </action>
+    </group>
+</group>
+
+    <group>
+        <switch>
+            <title>设备休眠</title>
+            <desc>开启或关闭设备休眠功能</desc>
+            <get>settings get global device_idle_constants</get>
+            <set><![CDATA[
+                if [ "$state" = "1" ]; then
+                    adb shell settings put global device_idle_constants null
+                    echo "已允许设备休眠"
+                else
+                    adb shell settings put global device_idle_constants "motion=2"
+                    echo "已禁止设备休眠"
+                fi
+            ]]></set>
+        </switch>
+    </group>
