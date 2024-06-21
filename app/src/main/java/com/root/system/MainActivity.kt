@@ -37,8 +37,6 @@ import com.omarea.krscript.model.*
 import com.omarea.krscript.ui.ActionListFragment
 import com.omarea.krscript.ui.ParamsFileChooserRender
 import com.root.system.FloatMonitor
-import com.root.system.Update
-import com.root.system.Update_beta
 import com.root.system.permissions.CheckRootStatus
 import com.root.system.ui.TabIconHelper
 import kotlinx.android.synthetic.main.activity_main.*
