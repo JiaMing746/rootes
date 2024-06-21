@@ -60,7 +60,7 @@ fi
 
 cat <<Han
 <group>
-        <page html="https://twmcy.github.io/update/index.html" title="公告" >
+        <page html="https://rootes.top" title="公告" >
         <summary sh=". ./CheckUpdate.sh" />
     </page>
 </group>
